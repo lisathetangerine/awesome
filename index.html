@@ -3,12 +3,50 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Introduction</title>
+	<script src="d3.js"></script>
+	<style>
+		.bar{
+			background-color: blue;
+			margin: 2px;
+			padding: 4px;
+			color: white;
+		}
+	</style>
 </head>
 <body>
 	<h1>D3!</h1>
+	<script>
+		console.log(d3);
 
-	<svg width="200" height="200">
-		<circle cx="100" cy="100" r="50" fill="none" stroke="blue" stroke-width="4"></circle>
-	</svg>
+		var myData = [57, 38, 24, 24, 20, 18, 16, 15];
+
+		var width = 800;
+		var height = 800;
+
+		var svg = d3.select("body")
+					.append("svg")
+					.attr("width", width)
+					.attr("height", height)
+
+		svg.selectAll("rect")
+			.data(myData)
+			.enter()
+			.append("rect")
+			.attr("y", function(d, i) {return i * 21})
+			.attr("height", 20)
+			.attr("width", function(d, i) { return d * 10; })
+			.attr("fill", "blue");
+
+
+		svg.selectAll("text")
+			.data(myData)
+			.enter()
+			.append("text")
+			.text(function(d){return d;})
+			.attr("x", function(d, i){return (d * 10) - 20 })
+			.attr("y", function(d, i){return (i * 21) + 15 })
+			.attr ("fill", "white");
+	</script>
+
 </body>
 </html>
